@@ -1,3 +1,11 @@
+Unreleased - se7enxweb/expcomponents-workflow
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Renamed: The package is se7enxweb/expcomponents-workflow, Exponential's
+  maintained fork of Zeta Components Workflow. It replaces zetacomponents/workflow,
+  so packages that require zetacomponents/workflow keep working. Class names
+  (ezc*) are unchanged.
+
 1.5.1 - Friday 16 December 2022
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
