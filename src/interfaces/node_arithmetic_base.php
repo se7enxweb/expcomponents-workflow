@@ -54,6 +54,13 @@ abstract class ezcWorkflowNodeArithmeticBase extends ezcWorkflowNode
     protected $operand = null;
 
     /**
+     * Whether the operation takes an operand (increment and decrement do not).
+     *
+     * @var bool
+     */
+    protected $usesOperand = true;
+
+    /**
      * Constructs a new action node with the configuration $configuration.
      *
      * Configuration format
@@ -111,16 +118,22 @@ abstract class ezcWorkflowNodeArithmeticBase extends ezcWorkflowNode
             );
         }
 
-        if ( is_numeric( $this->configuration['operand'] ) )
+        // A configuration given as a string names only the variable; reading
+        // an "operand" offset from it was an error on PHP 8.
+        $configuredOperand = is_array( $this->configuration ) && isset( $this->configuration['operand'] )
+            ? $this->configuration['operand']
+            : null;
+
+        if ( is_numeric( $configuredOperand ) )
         {
-            $this->operand = $this->configuration['operand'];
+            $this->operand = $configuredOperand;
         }
 
-        else if ( is_string( $this->configuration['operand'] ) )
+        else if ( is_string( $configuredOperand ) )
         {
             try
             {
-                $operand = $execution->getVariable( $this->configuration['operand'] );
+                $operand = $execution->getVariable( $configuredOperand );
 
                 if ( is_numeric( $operand ) )
                 {
@@ -132,7 +145,7 @@ abstract class ezcWorkflowNodeArithmeticBase extends ezcWorkflowNode
             }
         }
 
-        if ( $this->operand === null )
+        if ( $this->usesOperand && $this->operand === null )
         {
             throw new ezcWorkflowExecutionException( 'Illegal operand.' );
         }

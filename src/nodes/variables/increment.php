@@ -49,6 +49,13 @@ class ezcWorkflowNodeVariableIncrement extends ezcWorkflowNodeArithmeticBase
     protected $configuration;
 
     /**
+     * This node takes no operand.
+     *
+     * @var bool
+     */
+    protected $usesOperand = false;
+
+    /**
      * Perform variable modification.
      */
     protected function doExecute()

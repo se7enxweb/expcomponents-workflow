@@ -12,6 +12,12 @@ Unreleased - se7enxweb/expcomponents-workflow
 - Added: NOTICE keeps the upstream copyright notices and names the fork;
   README.md describes the fork.
 - Added: A GitHub Actions workflow running the test suite on PHP 7.4 to 8.5.
+- Fixed: On PHP 8, executing an increment or decrement node configured with
+  just the variable name (new ezcWorkflowNodeVariableIncrement( 'i' ))
+  threw a TypeError: the arithmetic base read an "operand" offset from the
+  string. PHP 7 only warned and took the variable's value as the operand.
+  The operand is read from an array configuration only, and only the nodes
+  that use one (add, sub, mul, div) require it.
 
 
 1.5.1 - Friday 16 December 2022
