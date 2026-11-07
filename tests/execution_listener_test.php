@@ -38,21 +38,21 @@ class ezcWorkflowExecutionListenerTest extends ezcWorkflowTestCase
 
     public static function suite()
     {
-        return new PHPUnit_Framework_TestSuite(
+        return new \PHPUnit\Framework\TestSuite(
           'ezcWorkflowExecutionListenerTest'
         );
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->execution = new ezcWorkflowTestExecution;
-        $this->listener  = $this->getMock( 'ezcWorkflowExecutionListener' );
+        $this->listener  = $this->getMockBuilder( 'ezcWorkflowExecutionListener' )->getMock();
         $this->execution->addListener( $this->listener );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->execution = NULL;
         $this->listener  = NULL;
@@ -199,13 +199,14 @@ class ezcWorkflowExecutionListenerTest extends ezcWorkflowTestCase
 
     protected function setUpExpectations( $log )
     {
+        // The expected events: the test logs of the WorkflowEventLogTiein
+        // component, kept in data/event_log_tiein (see its README).
         $lines = file(
-          dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR .
-          'WorkflowEventLogTiein' . DIRECTORY_SEPARATOR . 'tests' .
-          DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . $log . '.log'
+          __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'event_log_tiein' .
+          DIRECTORY_SEPARATOR . $log . '.log'
         );
 
-        $index = 0;
+        $expected = array();
 
         foreach ( array_map('rtrim', $lines ) as $line )
         {
@@ -216,13 +217,14 @@ class ezcWorkflowExecutionListenerTest extends ezcWorkflowTestCase
             $line = preg_replace('/instance #(\d)+/', 'instance #0', $line);
             $line = preg_replace('/node #(\d)+/', 'node #0', $line);
 
-            $this->listener
-                 ->expects( $this->at( $index ) )
-                 ->method( 'notify' )
-                 ->with( $this->equalTo( $line ) );
-
-            $index++;
+            $expected[] = array( $this->equalTo( $line ) );
         }
+
+        // Every event of the log, in this order, and no other
+        $this->listener
+             ->expects( $this->exactly( count( $expected ) ) )
+             ->method( 'notify' )
+             ->withConsecutive( ...$expected );
     }
 }
 ?>

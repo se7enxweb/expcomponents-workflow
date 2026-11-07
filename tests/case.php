@@ -41,7 +41,7 @@ abstract class ezcWorkflowTestCase extends ezcTestCase
     protected $cancelNode;
     protected $branchNode;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -51,7 +51,7 @@ abstract class ezcWorkflowTestCase extends ezcTestCase
 
         if ( !class_exists( 'ServiceObject', false ) )
         {
-            $this->getMock( 'ezcWorkflowServiceObject', array(), array(), 'ServiceObject' );
+            $this->getMockBuilder( 'ezcWorkflowServiceObject' )->setMockClassName( 'ServiceObject' )->getMock();
         }
     }
 

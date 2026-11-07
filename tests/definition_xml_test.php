@@ -34,10 +34,10 @@ class ezcWorkflowDefinitionStorageXmlTest extends ezcWorkflowTestCase
 {
     public static function suite()
     {
-        return new PHPUnit_Framework_TestSuite( 'ezcWorkflowDefinitionStorageXmlTest' );
+        return new \PHPUnit\Framework\TestSuite( 'ezcWorkflowDefinitionStorageXmlTest' );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->removeTempDir();
     }
@@ -63,11 +63,15 @@ class ezcWorkflowDefinitionStorageXmlTest extends ezcWorkflowTestCase
     public function testLoadServiceObjectWithArguments2()
     {
         $this->workflow = $this->xmlStorage->loadByName( 'ServiceObjectWithArguments2' );
+        $this->assertInstanceOf( 'ezcWorkflow', $this->workflow );
+        $this->assertSame( 'ServiceObjectWithArguments2', $this->workflow->name );
     }
 
     public function testLoadServiceObjectWithArguments3()
     {
         $this->workflow = $this->xmlStorage->loadByName( 'ServiceObjectWithArguments3' );
+        $this->assertInstanceOf( 'ezcWorkflow', $this->workflow );
+        $this->assertSame( 'ServiceObjectWithArguments3', $this->workflow->name );
     }
 
     /**
@@ -141,30 +145,16 @@ class ezcWorkflowDefinitionStorageXmlTest extends ezcWorkflowTestCase
 
     public function testExceptionWhenLoadingNotExistingWorkflow()
     {
-        try
-        {
-            $this->xmlStorage->loadByName( 'NotExisting' );
-        }
-        catch ( ezcWorkflowDefinitionStorageException $e )
-        {
-            return;
-        }
+        $this->expectException( 'ezcWorkflowDefinitionStorageException' );
 
-        $this->fail( 'Expected an ezcWorkflowDefinitionStorageException to be thrown.' );
+        $this->xmlStorage->loadByName( 'NotExisting' );
     }
 
     public function testExceptionWhenLoadingNotExistingWorkflowVersion()
     {
-        try
-        {
-            $workflow = $this->xmlStorage->loadByName( 'StartEnd', 2 );
-        }
-        catch ( ezcWorkflowDefinitionStorageException $e )
-        {
-            return;
-        }
+        $this->expectException( 'ezcWorkflowDefinitionStorageException' );
 
-        $this->fail( 'Expected an ezcWorkflowDefinitionStorageException to be thrown.' );
+        $workflow = $this->xmlStorage->loadByName( 'StartEnd', 2 );
     }
 
     public function testExceptionWhenLoadingNotValidWorkflow()
@@ -184,16 +174,9 @@ class ezcWorkflowDefinitionStorageXmlTest extends ezcWorkflowTestCase
 
     public function testExceptionWhenLoadingNotWellFormedWorkflow()
     {
-        try
-        {
-            $this->xmlStorage->loadByName( 'NotWellFormed' );
-        }
-        catch ( ezcWorkflowDefinitionStorageException $e )
-        {
-            return;
-        }
+        $this->expectException( 'ezcWorkflowDefinitionStorageException' );
 
-        $this->fail( 'Expected an ezcWorkflowDefinitionStorageException to be thrown.' );
+        $this->xmlStorage->loadByName( 'NotWellFormed' );
     }
 
     /**

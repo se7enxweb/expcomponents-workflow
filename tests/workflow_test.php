@@ -38,7 +38,7 @@ class ezcWorkflowTest extends ezcWorkflowTestCase
 
     public static function suite()
     {
-        return new PHPUnit_Framework_TestSuite( 'ezcWorkflowTest' );
+        return new \PHPUnit\Framework\TestSuite( 'ezcWorkflowTest' );
     }
 
     public function testWorkflowNameCanBeRetrieved()
@@ -111,6 +111,12 @@ class ezcWorkflowTest extends ezcWorkflowTestCase
         $this->assertFalse( $this->workflow->isInteractive() );
     }
 
+    /**
+     * verify() returns nothing and throws ezcWorkflowInvalidWorkflowException for
+     * an invalid workflow: the test passes when it throws nothing.
+     *
+     * @doesNotPerformAssertions
+     */
     public function testValidityOfAWorkflowCanBeVerified()
     {
         $this->setUpStartEnd();

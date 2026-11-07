@@ -1,0 +1,8 @@
+The expected execution events of ezcWorkflowExecutionListenerTest.
+
+These logs are the test data of the Zeta Components WorkflowEventLogTiein
+component (tests/data/*.log at commit 4b216b4fd6d9aaf538338271990dc73b37f0d636
+of https://github.com/zetacomponents/WorkflowEventLogTiein), Apache License 2.0.
+Upstream's test read them from a WorkflowEventLogTiein checkout next to this
+component; the released package of that component cannot be installed (its
+composer.json requires "zetacomponents/worflow"), so they are kept here.

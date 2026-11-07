@@ -37,16 +37,16 @@ class ezcWorkflowExecutionTest extends ezcWorkflowTestCase
 
     public static function suite()
     {
-        return new PHPUnit_Framework_TestSuite( 'ezcWorkflowExecutionTest' );
+        return new \PHPUnit\Framework\TestSuite( 'ezcWorkflowExecutionTest' );
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->execution = new ezcWorkflowTestExecution;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->execution = NULL;
     }
@@ -241,7 +241,7 @@ class ezcWorkflowExecutionTest extends ezcWorkflowTestCase
 
     public function testExecuteStartSetUnsetEnd2()
     {
-        $plugin = $this->getMock( 'ezcWorkflowExecutionPlugin', array( 'beforeVariableUnset' ) );
+        $plugin = $this->getMockBuilder( 'ezcWorkflowExecutionPlugin' )->onlyMethods( array( 'beforeVariableUnset' ) )->getMock();
         $plugin->expects( $this->any() )
                ->method( 'beforeVariableUnset' )
                ->will( $this->returnValue( false ) );
@@ -762,7 +762,7 @@ class ezcWorkflowExecutionTest extends ezcWorkflowTestCase
 
     public function testListener()
     {
-        $listener = $this->getMock( 'ezcWorkflowExecutionListener' );
+        $listener = $this->getMockBuilder( 'ezcWorkflowExecutionListener' )->getMock();
 
         $this->assertFalse( $this->execution->removeListener( $listener ) );
 
@@ -775,7 +775,7 @@ class ezcWorkflowExecutionTest extends ezcWorkflowTestCase
 
     public function testPlugin()
     {
-        $plugin = $this->getMock( 'ezcWorkflowExecutionPlugin' );
+        $plugin = $this->getMockBuilder( 'ezcWorkflowExecutionPlugin' )->getMock();
 
         $this->assertTrue( $this->execution->addPlugin( $plugin ) );
         $this->assertFalse( $this->execution->addPlugin( $plugin ) );

@@ -38,21 +38,21 @@ class ezcWorkflowExecutionPluginTest extends ezcWorkflowTestCase
 
     public static function suite()
     {
-        return new PHPUnit_Framework_TestSuite(
+        return new \PHPUnit\Framework\TestSuite(
           'ezcWorkflowExecutionPluginTest'
         );
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->execution = new ezcWorkflowTestExecution;
-        $this->plugin    = $this->getMock( 'ezcWorkflowExecutionPlugin' );
+        $this->plugin    = $this->getMockBuilder( 'ezcWorkflowExecutionPlugin' )->getMock();
         $this->execution->addPlugin( $this->plugin );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->execution = NULL;
         $this->plugin    = NULL;

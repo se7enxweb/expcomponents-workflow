@@ -18,6 +18,9 @@ Unreleased - se7enxweb/expcomponents-workflow
   string. PHP 7 only warned and took the variable's value as the operand.
   The operand is read from an array configuration only, and only the nodes
   that use one (add, sub, mul, div) require it.
+- Updated: The tests run on PHPUnit 9 (PHP 7.4 to 8.5). The listener tests
+  read the expected events from tests/data/event_log_tiein, the test logs of
+  the WorkflowEventLogTiein component, instead of a checkout next to this one.
 
 
 1.5.1 - Friday 16 December 2022

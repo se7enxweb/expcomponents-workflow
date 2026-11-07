@@ -36,10 +36,10 @@ class ezcWorkflowVisitorVisualizationTest extends ezcWorkflowTestCase
 
     public static function suite()
     {
-        return new PHPUnit_Framework_TestSuite( 'ezcWorkflowVisitorVisualizationTest' );
+        return new \PHPUnit\Framework\TestSuite( 'ezcWorkflowVisitorVisualizationTest' );
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

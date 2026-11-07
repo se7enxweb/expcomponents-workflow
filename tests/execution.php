@@ -112,9 +112,9 @@ class ezcWorkflowTestExecution extends ezcWorkflowExecutionNonInteractive
     {
         parent::suspend();
 
-        PHPUnit_Framework_Assert::assertFalse( $this->hasEnded() );
-        PHPUnit_Framework_Assert::assertFalse( $this->isResumed() );
-        PHPUnit_Framework_Assert::assertTrue( $this->isSuspended() );
+        \PHPUnit\Framework\Assert::assertFalse( $this->hasEnded() );
+        \PHPUnit\Framework\Assert::assertFalse( $this->isResumed() );
+        \PHPUnit\Framework\Assert::assertTrue( $this->isSuspended() );
 
         $inputData  = array();
         $waitingFor = $this->getWaitingFor();

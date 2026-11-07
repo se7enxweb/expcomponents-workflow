@@ -39,10 +39,10 @@ class ezcWorkflowExecutionPluginVisualizerTest extends ezcWorkflowTestCase
 
     public static function suite()
     {
-        return new PHPUnit_Framework_TestSuite( 'ezcWorkflowExecutionPluginVisualizerTest' );
+        return new \PHPUnit\Framework\TestSuite( 'ezcWorkflowExecutionPluginVisualizerTest' );
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -53,7 +53,7 @@ class ezcWorkflowExecutionPluginVisualizerTest extends ezcWorkflowTestCase
         $this->execution->addPlugin( $this->visualizer );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->removeTempDir();
     }
