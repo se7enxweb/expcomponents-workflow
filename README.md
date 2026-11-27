@@ -2,7 +2,7 @@
 
 The purpose of the Workflow component is to provide the core functionality of an activity-based workflow system including the definition and execution of workflow specifications.
 
-This is the Exponential fork of [zetacomponents/Workflow](https://github.com/zetacomponents/Workflow),
+This is the Exponential Components fork of [zetacomponents/Workflow](https://github.com/zetacomponents/Workflow),
 maintained by 7x (se7en.x) and the Exponential Foundation for Exponential and anyone else
 who uses the Zeta Components Workflow component on current PHP versions. All credit for the
 component goes to the Zeta Components authors listed in `composer.json` and `CREDITS`;
